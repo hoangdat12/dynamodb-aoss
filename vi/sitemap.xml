@@ -51,18 +51,6 @@
                 href="/vi/1-introduce/"
                 />
   </url><url>
-    <loc>/vi/6.terraform/6.1createresource/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/6.terraform/6.1createresource/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="/vi/6.terraform/6.1createresource/"
-                />
-  </url><url>
     <loc>/vi/2-prerequiste/2.1-createdynamodb/</loc>
     <xhtml:link
                 rel="alternate"
@@ -85,18 +73,6 @@
                 rel="alternate"
                 hreflang="vi"
                 href="/vi/2-prerequiste/"
-                />
-  </url><url>
-    <loc>/vi/6.terraform/6.2cleanup/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/6.terraform/6.2cleanup/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="/vi/6.terraform/6.2cleanup/"
                 />
   </url><url>
     <loc>/vi/3-replicate/3.2-handledataandsaveinaoss/</loc>
@@ -218,18 +194,6 @@
                 rel="alternate"
                 hreflang="vi"
                 href="/vi/2-prerequiste/2.5-createiamrole/"
-                />
-  </url><url>
-    <loc>/vi/6.terraform/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/6.terraform/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="/vi/6.terraform/"
                 />
   </url><url>
     <loc>/vi/categories/</loc>

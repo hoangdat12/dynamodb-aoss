@@ -39,18 +39,6 @@
                 href="/3-replicate/3.1-exportdynamodbdatatos3/"
                 />
   </url><url>
-    <loc>/6.terraform/6.1createresource/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="/vi/6.terraform/6.1createresource/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/6.terraform/6.1createresource/"
-                />
-  </url><url>
     <loc>/1-introduce/</loc>
     <xhtml:link
                 rel="alternate"
@@ -73,18 +61,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="/4-synchronize/4.1-dynamodbstream/"
-                />
-  </url><url>
-    <loc>/6.terraform/6.2cleanup/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="/vi/6.terraform/6.2cleanup/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/6.terraform/6.2cleanup/"
                 />
   </url><url>
     <loc>/2-prerequiste/2.2-createapigateway/</loc>
@@ -218,18 +194,6 @@
                 rel="alternate"
                 hreflang="en"
                 href="/2-prerequiste/2.5-createiamrole/"
-                />
-  </url><url>
-    <loc>/6.terraform/</loc>
-    <xhtml:link
-                rel="alternate"
-                hreflang="vi"
-                href="/vi/6.terraform/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="/6.terraform/"
                 />
   </url><url>
     <loc>/categories/</loc>

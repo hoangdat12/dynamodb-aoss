@@ -4,7 +4,7 @@
 	"title": "Replicate và synchronize dữ liệu từ DynamoDB đến OpenSearch Serverless",
 	"tags": [],
 	"description": "",
-	"content": "Replicate và synchronize dữ liệu từ DynamoDB đến OpenSearch Serverless Tổng quan Trong bài lab này, bạn sẽ học về những khái niệm của DynamoDB, OpenSearch Serverless và làm sao chúng ta có thể replicate và synchronize dữ liệu từ DynamoDB đến OpenSearch Serverless để tối ưu các truy vấn tìm kiến, bạn cũng có thể thực hành tạo DynamoDB, OpenSearch Serverless\nNội dung Giới thiệu Các bước chuẩn bị Replicate dữ liệu Synchronize dữ liệu Dọn dẹp Tài nguyên Thực hiện với Terraform "
+	"content": "Replicate và synchronize dữ liệu từ DynamoDB đến OpenSearch Serverless Tổng quan Trong bài lab này, bạn sẽ học về những khái niệm của DynamoDB, OpenSearch Serverless và làm sao chúng ta có thể replicate và synchronize dữ liệu từ DynamoDB đến OpenSearch Serverless để tối ưu các truy vấn tìm kiến, bạn cũng có thể thực hành tạo DynamoDB, OpenSearch Serverless\nNội dung Giới thiệu Các bước chuẩn bị Replicate dữ liệu Synchronize dữ liệu Dọn dẹp Tài nguyên "
 },
 {
 	"uri": "/vi/4-synchronize/4.1-dynamodbstream/",
@@ -28,13 +28,6 @@
 	"content": "Serverless là một mô hình phát triển dựa trên điện toán đám mây, cho phép các lập trình viên xây dựng và triển khai ứng dụng mà không cần máy chủ cũng như giảm bớt việc quản lý hạ tầng cho lập trình viên.\nDynamoDB là một dịch vụ fully managed NoSQL databasecung cấp hiệu suất nhanh chóng và dự đoán được với khả năng mở rộng chính xác. DynamoDB cho phép bạn giảm bớt gánh nặng quản lý khi vận hành và mở rộng một distributed database, để bạn không phải lo lắng về việc cung cấp phần cứng, thiết lập và cấu hình, sao chép dữ liệu, cập nhật phần mềm hoặc mở rộng cụm.\nOpenSearch Serverless Amazon OpenSearch Serverless là một tùy chọn serverless trong dịch vụ Amazon OpenSearch. Là một nhà phát triển, bạn có thể sử dụng OpenSearch Serverless để chạy công việc quy mô petabyte mà không cần cấu hình, quản lý và mở rộng các cụm OpenSearch. Thời gian phản hồi chỉ trong millisecond giống như OpenSearch Service nhưng với sự đơn giản của môi trường serverless.\nKinesis Stream là một dịch vụ serverless streaming data giúp đơn giản hóa việc thu thập, xử lý và lưu trữ các luồng dữ liệu ở mọi quy mô, nó được thiết kế để xử lý các luồng dữ liệu quy mô lớn từ nhiều dịch vụ khác nhau trong thời gian thực.\nLambda là một dịch vụ serverless compute, thực thi code của bạn dựa trên các event, xử lý tài nguyên tính toán cho bạn.\nTrong bài lab này, bạn sẽ thực hành tích hợp DynamoDB và OpenSearch Serverless. Bạn sẽ học cách để replicate và synchronize dữ liệu một cách hiệu quả giữa các dịch vụ này bằng cơ chế stream như DynamoDB Streams và Kinesis Streams.\n"
 },
 {
-	"uri": "/vi/6.terraform/6.1createresource/",
-	"title": "Khởi tạo tài nguyên với Terraform",
-	"tags": [],
-	"description": "",
-	"content": "Chuẩn bị code Click ở đây để tải code về Mở code và di chuyển đến thư mục terraform Cài đặt môi trường Tải Terraform Thực hiện câu lệnh để cài đặt Terraform sudo yum install -y yum-utils shadow-utils sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo sudo yum -y install terraform Cấu hình ở local để tương tác với AWS, thực thi lệnh aws configure Khởi tạo tài nguyên Thực thi câu lệnh terraform init để khởi tại tài nguyên cho Terraform Thực thi câu lệnh terraform validate để kiểm tra cú pháp của Terraform file Thực thi câu lệnh terraform plan để tạo hoặc xem sự thay đổi của Terraform Thực thi câu lệnh terraform apply -auto-approve để apply cho aws Tiến hành kiểm tra trong AWS Console Vào EC2 kiểm tra xem có đủ 3 Instance là jenkins instance và 2 nodes Vào EKS kiểm tra xem có eks-cluster Chuẩn bị Tạo Github Access Token Truy cập Github Setting -\u0026gt; Cuộn xuống và chọn Developing Setting -\u0026gt; chọn Personal access token và click Token (classic) Chọn Generate new token và click Generate new token (classic) Nhập jenkins-access Tích tất cả các button ở dưới Click Generate token Để hiểu hơn về cấu hình Github Access Token, chúng ta có thể tham khảo tại đây\nSao chép Token vừa tạo Truy cập Jenkins Browser Tại Dashboard chọn Manages Jenkins Chọn Credentials Click globals Click Add credentials Chọn Kind is Username with password Nhập Github username và token vừa tạo Nhập ID jenkins-git Chọn Create Tạo Docker hub Access Token Truy cập Docker hub -\u0026gt; chọn My Account Chọn Security Chọn New Access Token Nhập Access token Description Click Generate Sao chép Docker Access Token và làm tương tự với Github Access Token trong Jenkins Truy cập Jenkins Browser Tại Dashboard chọn Manages Jenkins Chọn Credentials Click globals Click Add credentials Chọn Kind là Username with password Nhập Docker username và token vừa tạo Nhập ID docker-crd Chọn Create Tạo AWS_ACCESS_KEY_ID Truy cập Jenkins Browser Tại Dashboard chọn Manages Jenkins Chọn Credentials Click globals Click Add credentials Chọn Kind là Secret text Nhập Docker secret của aws_access_key_id trong file.cvs Nhập ID AWS_ACCESS_KEY_ID Chọn Create Tạo AWS_SECRET_ACCESS_KEY Truy cập Jenkins Browser Tại Dashboard chọn Manages Jenkins Chọn Credentials Click globals Click Add credentials Chọn Kind is Secret text Nhập Docker secret của aws_secret_access_key trong file.cvs Nhập ID AWS_SECRET_ACCESS_KEY Chọn Create Hoàn tất Sau khi hoàn thành, Jenkins Credentails của chúng ta sẽ có 4 file như bên dưới CICD Triển khai CICD như Phần 4\n"
-},
-{
 	"uri": "/vi/2-prerequiste/2.1-createdynamodb/",
 	"title": "Tạo DynamoDb table",
 	"tags": [],
@@ -47,13 +40,6 @@
 	"tags": [],
 	"description": "",
 	"content": "Tổng quan Trong bước này, chúng ta sẽ thực hiện tạo IAM Role Tạo một DynamoDB table Tạo một API Gateway như một Proxy cho DynamoDB table Tạo một S3 Bucket để lưu file export từ DynamoDB Tạo một OpenSearch Serverless Collection Nội dung Tạo Dynamodb table Tạo API Gateway Tạo OpenSearch Serverless Collection Tạo S3 bucket Chuẩn bị IAM Role "
-},
-{
-	"uri": "/vi/6.terraform/6.2cleanup/",
-	"title": "Dọn dẹp tài nguyên",
-	"tags": [],
-	"description": "",
-	"content": " Thực thi lệnh terraform destroy -auto-approve để dọn dẹp tài nguyên "
 },
 {
 	"uri": "/vi/3-replicate/3.2-handledataandsaveinaoss/",
@@ -124,13 +110,6 @@
 	"tags": [],
 	"description": "",
 	"content": "Trong bước này, chúng ta cần tạo một IAM Role cho Lambda function và API Gateway\nTạo Lambda replicate Role Truy cập vào Giao diện quản trị IAM Chọn Roles Chọn Create role Trong bước Select trusted entity Chọn AWS service Tại Service or use case, chọn Lambda Tại Use case, chọn Lambda Click Create Trong bước Add permissions Tìm và chọn AWSLambdaExecute Click Next Trong bước Name, review, and create Nhập lambda-lab-role Kéo xuống và click Create role "
-},
-{
-	"uri": "/vi/6.terraform/",
-	"title": "Triển khai với Terraform",
-	"tags": [],
-	"description": "",
-	"content": "Tổng quan Terraform là một công cụ mã nguồn mở cho phép bạn định nghĩa Infrastructure as Code - IaC với đa dạng cloud provider ví dụ: Alibaba Cloud, AWS, Azure… Terraform giúp bạn quản lý hệ thống bằng code và tự động hóa việc triển khai hạ tầng của bạn. Bạn có thể sử dụng Terraform để quản lý các tài nguyên như máy chủ, mạng, cơ sở dữ liệu và các tài nguyên khác của các nhà cung cấp đám mây khác nhau. Trong phần này, chúng ta sẽ tìm hiểu về Terraform và làm việc với các lệnh cơ bản của nó. Nội dung Khởi tạo tài nguyên với Terraform Dọn dẹp tài nguyên "
 },
 {
 	"uri": "/vi/categories/",
